@@ -5,7 +5,7 @@ import { PlacesPage } from './places.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'places',
     component: PlacesPage,
     children: [
       {
@@ -18,14 +18,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/places/tabs/discover',
+        redirectTo: '/places/discover',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/places/tabs/discover',
+    redirectTo: '/places/discover',
     pathMatch: 'full'
   }
 ];
