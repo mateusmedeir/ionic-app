@@ -8,13 +8,13 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
-        <ion-card >
+        <ion-card>
           <ion-card-header>
-            <img alt="place image" [src]="loadedPlaces[0].imageUrl">
-            <ion-card-title>{{ loadedPlaces[0].title }}</ion-card-title>
-            <ion-card-subtitle>{{ loadedPlaces[0].price | currency }} / Night</ion-card-subtitle>
+            <img alt="place image" [src]="places[0].imageUrl">
+            <ion-card-title>{{ places[0].title }}</ion-card-title>
+            <ion-card-subtitle>{{ places[0].price | currency }} / Night</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>{{ loadedPlaces[0].description }}</ion-card-content>
+          <ion-card-content>{{ places[0].description }}</ion-card-content>
           <div>
             <ion-button
               fill="clear"
@@ -23,7 +23,7 @@
                 '/',
                 'places',
                 'discover',
-                loadedPlaces[0].id
+                places[0].id
               ]"
             >
             More
@@ -36,9 +36,10 @@
       <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
         <ion-list>
           <ion-item
-            *ngFor="let place of loadedPlaces.slice(1)"
+            *ngFor="let place of places.slice(1)"
             [routerLink]="['/', 'places', 'discover', place.id]"
-            detail>
+            detail
+            >
             <ion-thumbnail slot="start">
               <img alt="place image" [src]="place.imageUrl">
             </ion-thumbnail>
