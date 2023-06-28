@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PlacesPage } from './places.page';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'places',
+    path: '',
     component: PlacesPage,
     children: [
       {
