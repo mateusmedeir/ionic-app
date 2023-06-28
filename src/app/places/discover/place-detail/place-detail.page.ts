@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../../places.service';
 import { Place } from '../../places.model';
-import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController, NavController } from '@ionic/angular';
+import { CreateBookingComponent } from '../../../bookings/create-booking/create-booking.component';
 
 @Component({
   selector: 'app-place-detail',
@@ -14,15 +15,36 @@ export class PlaceDetailPage implements OnInit {
 
   constructor(
     private placesService: PlacesService,
-    private router: Router,
-    private navCtrl: NavController
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
     ) { }
 
   ngOnInit() {
-
+    this.route.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('placeId')) {
+        this.navCtrl.navigateBack('/places/discover');
+        return;
+      }
+      this.place = this.placesService.getPlace(String(paramMap.get('placeId'))) as Place;
+      if (!this.place) {
+        this.navCtrl.navigateBack('/places/discover');
+        return;
+      }
+    });
   }
 
   onBookPlace() {
-    this.navCtrl.navigateBack('places/discover');
+    this.modalCtrl.create({
+      component: CreateBookingComponent,
+      componentProps: {selectedPlace: this.place}
+    })
+    .then(modalEl => {
+      modalEl.present();
+      return modalEl.onDidDismiss();
+    })
+    .then(resultData => {
+      if(resultData.role) console.log('BOOKED!');
+    });
   }
 }
