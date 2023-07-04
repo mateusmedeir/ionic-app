@@ -25,12 +25,12 @@
       <ion-col size-sm="8" offset-sm="2" class="ion-text-center">
         <ion-list>
           <ion-item
-            *ngFor="let place of places.slice(1)"
+            *ngFor="let place of loadedPlaces"
             [routerLink]="['/', 'places', 'discover', place.id]"
             detail
             >
             <ion-thumbnail slot="start">
-              <img alt="place image" [src]="place.imageUrl">
+              <ion-img alt="place image" [src]="place.imageUrl"></ion-img>
             </ion-thumbnail>
             <ion-label>
               <h2>{{ place.title }}</h2>
@@ -38,6 +38,9 @@
             </ion-label>
           </ion-item>
         </ion-list>
+        <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-col>
     </ion-row>
   </ion-grid>
