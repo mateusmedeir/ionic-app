@@ -1,0 +1,8 @@
+<ion-card class="place-card" [routerLink]="['/', 'places', 'discover', place.id]" detail>
+  <ion-img class="place-img" alt="place image" [src]="place.imageUrl"></ion-img>
+  <ion-card-header class="ion-no-padding ion-padding-vertical">
+    <ion-card-title>{{ place.title }}</ion-card-title>
+    <ion-card-subtitle>{{ place.price | currency }} / Night</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>{{ place.description }}</ion-card-content>
+</ion-card>

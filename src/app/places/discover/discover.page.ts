@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Place } from '../places.model';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, SegmentChangeEventDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-discover',
@@ -10,20 +10,18 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 })
 export class DiscoverPage implements OnInit {
   places!: Place[];
-  loadedPlaces!: Place[];
-  index: number = 1;
-  increasedAmount: number = 10;
+  loadedPlaces: Place[] = [];
+  index: number = 0;
+  increasedAmount: number = 12;
 
   constructor(private placesService: PlacesService) { }
 
   ngOnInit() {
     this.places = this.placesService.places;
-    this.loadedPlaces = this.places.slice(this.index, this.increasedAmount + 1);
-    this.index += this.loadedPlaces.length;
+    this.loadPlaces();
   }
 
   private loadPlaces() {
-    console.log(this.index, this.index + this.increasedAmount);
     this.loadedPlaces.push(...this.places.slice(this.index, this.index + this.increasedAmount));
     this.index += this.increasedAmount + 1;
   }
@@ -35,5 +33,9 @@ export class DiscoverPage implements OnInit {
       if (this.loadedPlaces.length + 1 === this.places.length)
         (ev as InfiniteScrollCustomEvent).target.disabled = true;
     }, 500);
+  }
+
+  onFilterUpdate(ev: any) {
+
   }
 }
