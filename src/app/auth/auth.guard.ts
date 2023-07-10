@@ -15,7 +15,7 @@ export class AuthGuard {
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.authService.userIsAuthenticated) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/auth');
     }
     return this.authService.userIsAuthenticated;
   }
