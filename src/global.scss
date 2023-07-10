@@ -24,3 +24,13 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-segment-button::part(indicator-background) {
+  background: #3880ff;
+}
+
+/* iOS styles */
+
+.segment-button-checked.ios::part(native) {
+  color: #fff;
+}
